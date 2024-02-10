@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sizzle Drizzle Combo Pack</title>
+    <!-- Tailwind CSS CDN for styling (optional) -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Custom styles */
+        .carousel-image {
+            display: none;
+            /* Hide images by default */
+            width: 100%;
+            height: 100svh;
+            /* Set a fixed height for the carousel images */
+            object-fit: cover;
+            /* Ensure images cover the container */
+        }
+
+        .carousel-image.active {
+            display: block;
+            /* Show active image */
+        }
+
+        .carousel-image:nth-child(1) {
+            background-color: #ffcccc;
+            /* Light Red */
+        }
+
+        .carousel-image:nth-child(2) {
+            background-color: #cce5ff;
+            /* Light Blue */
+        }
+
+        .carousel-image:nth-child(3) {
+            background-color: #daffc3;
+            /* Light Green */
+        }
+
+        .carousel-image:nth-child(4) {
+            background-color: #ffd9b3;
+            /* Light Orange */
+        }
+
+        .color-buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            overflow: hidden;
+            /* Hide overflow to control the animation */
+        }
+
+        .color-buttons.active {
+            animation: slideInLeft 0.5s ease-in-out;
+            /* Animation for the color change */
+        }
+
+        @keyframes slideInLeft {
+            0% {
+                transform: translateX(-100%);
+                /* Initial position outside the container */
+            }
+
+            100% {
+                transform: translateX(0);
+                /* Final position, sliding in from the left */
+            }
+        }
+
+        @media (min-width: 768px) {
+            .product-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                /* Two equal columns */
+                gap: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100">
+    <div class="container mx-auto py-8 px-4">
+        <div class="product-grid">
+            <!-- Left Section: Image Carousel -->
+            <div class="color-buttons" id="left" style="height: 100svh; justify-content: end;">
+                <button class="color-button" onclick="changeColor('red')">Red</button>
+                <button class="color-button" onclick="changeColor('blue')">Blue</button>
+                <button class="color-button" onclick="changeColor('green')">Green</button>
+                <button class="color-button" onclick="changeColor('yellow')">Yellow</button>
+                <button class="color-button" onclick="changeColor('purple')">Purple</button>
+            </div>
+
+            <!-- Right Section: Product Information -->
+            <div class="product-info">
+                <h2 class="text-2xl font-semibold mb-4">Sizzle Drizzle Combo Pack</h2>
+                <!-- Quantity Selector -->
+                <div class="flex items-center mb-4">
+                    <label for="quantity" class="mr-2">Quantity:</label>
+                    <input id="quantity" type="number" min="1" class="border border-gray-300 p-2 w-16" value="1">
+                </div>
+                <!-- Buttons -->
+                <div class="flex space-x-4 mb-4">
+                    <button
+                        class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition duration-300">Add
+                        to Cart</button>
+                    <button
+                        class="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600 transition duration-300">Buy
+                        Now</button>
+                </div>
+                <!-- Accordion for Description, Harvest, Use Case -->
+                <div class="accordion border-t border-gray-300 pt-4" style="display: flex; flex-direction: row;justify-content: space-around;">
+                    <!-- Description -->
+                    <div class="accordion-item mb-2">
+                        <h3 class="accordion-title cursor-pointer font-medium">Description</h3>
+                        <div class="accordion-content hidden">
+                            <p><strong>DRIZZLE: 500ML</strong><br>
+                                Extra Virgin finishing oil made from olives that are picked early, when flavor is bold
+                                and antioxidants are highest. Made for eating, never heating.</p>
+                            <p><strong>SIZZLE: 750ML</strong><br>
+                                Extra Virgin cooking oil made from mature, mid-season olives that yield a more mellow
+                                flavor. Use it every day, in every way.</p>
+                        </div>
+                    </div>
+                    <!-- Harvest -->
+                    <div class="accordion-item mb-2">
+                        <h3 class="accordion-title cursor-pointer font-medium">Harvest</h3>
+                        <div class="accordion-content hidden">
+                            <p><strong>DRIZZLE:</strong><br>
+                                Harvested in October, before the olives have ripened fully. Picked by hand because young
+                                olives need a firm yank to loosen up.</p>
+                            <p><strong>SIZZLE:</strong><br>
+                                Harvested in November and December, when the olives are more mature. They’re pretty laid
+                                back by this point, so it only takes a few shakes to get them off the branch.</p>
+                        </div>
+                    </div>
+                    <!-- Use Case -->
+                    <div class="accordion-item mb-2">
+                        <h3 class="accordion-title cursor-pointer font-medium">Use Case</h3>
+                        <div class="accordion-content hidden">
+                            <p><strong>DRIZZLE:</strong><br>
+                                A little Drizzle goes a long way! Use it on and around things like ice cream, pesto,
+                                popcorn, salads, sandwiches or even directly on your tongue (we won’t tell).</p>
+                            <p><strong>SIZZLE:</strong><br>
+                                If you would put it in or on top of an oven, use sizzle. Chicken Cutlets, Sheet Pan
+                                Veggies, Fried Rice, or even Chocolate Chip Cookies! You name it, Sizzle sizzles it.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function changeColor(color) {
+            const colorButtons = document.getElementById('left');
+            colorButtons.style.backgroundColor = color;
+            colorButtons.classList.add('active');
+
+            // Reset the animation class after the animation completes
+            setTimeout(() => {
+                colorButtons.classList.remove('active');
+            }, 500); // Adjust the timeout to match the animation duration
+        }
+        document.addEventListener('DOMContentLoaded', function () {
+            const images = document.querySelectorAll('.carousel-image');
+            let currentIndex = 0;
+
+            function showImage(index) {
+                images.forEach((image, i) => {
+                    if (i === index) {
+                        image.classList.add('active');
+                    } else {
+                        image.classList.remove('active');
+                    }
+                });
+            }
+
+            function nextImage() {
+                currentIndex = (currentIndex + 1) % images.length;
+                showImage(currentIndex);
+            }
+
+            function prevImage() {
+                currentIndex = (currentIndex - 1 + images.length) % images.length;
+                showImage(currentIndex);
+            }
+
+            // Add event listeners for navigation, for example:
+            // document.getElementById('nextButton').addEventListener('click', nextImage);
+            // document.getElementById('prevButton').addEventListener('click', prevImage);
+        });
+
+        // JavaScript for Accordion functionality with exclusive opening
+        document.addEventListener('DOMContentLoaded', function () {
+            const accordionTitles = document.querySelectorAll('.accordion-title');
+            const accordionContents = document.querySelectorAll('.accordion-content');
+
+            // Function to close all accordion contents
+            function closeAllAccordionContents() {
+                accordionContents.forEach(content => {
+                    content.classList.add('hidden');
+                });
+            }
+
+            // Event listener for each title
+            accordionTitles.forEach(title => {
+                title.addEventListener('click', function () {
+                    // Close all contents
+                    closeAllAccordionContents();
+
+                    // Toggle the clicked one
+                    const content = this.nextElementSibling;
+                    if (content.classList.contains('hidden')) {
+                        content.classList.remove('hidden');
+                    } else {
+                        content.classList.add('hidden');
+                    }
+                });
+            });
+        });
+    </script>
+
+
+</body>
+
+</html>
